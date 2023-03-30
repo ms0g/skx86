@@ -1,9 +1,17 @@
 org 0
 bits 16
 
-jmp 0x7c0:start
+; faked bios parameter block since running on real hardware.
+; https://wiki.osdev.org/FAT#BPB_.28BIOS_Parameter_Block.29
+_start:
+     jmp short start
+     nop
+
+times 33 db 0
 
 start:
+     jmp 0x7c0:init
+init:
      cli ; clear interrupts
      mov ax, 0x7c0
      mov ds, ax
