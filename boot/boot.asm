@@ -7,30 +7,30 @@ DATA_SEG equ gdt_data - gdt_start
 ; faked bios parameter block since running on real hardware.
 ; https://wiki.osdev.org/FAT#BPB_.28BIOS_Parameter_Block.29
 _start:
-     jmp short start
-     nop
+    jmp short start
+    nop
 
 times 33 db 0
 
 start:
-     jmp 0x7c0:init
+    jmp 0:init
 
 init:
-     cli ; clear interrupts
-     mov ax, 0x00
-     mov ds, ax
-     mov es, ax
-     mov ss, ax
-     mov sp, 0x7c00
-     sti ; enable interrupts
+    cli ; clear interrupts
+    mov ax, 0x00
+    mov ds, ax
+    mov es, ax
+    mov ss, ax
+    mov sp, 0x7c00
+    sti ; enable interrupts
 
 .load_protected:
-     cli
-     lgdt[gdt_descriptor]
-     mov eax, cr0
-     or eax, 0x1
-     mov cr0, eax
-     jmp CODE_SEG:load32
+    cli
+    lgdt[gdt_descriptor]
+    mov eax, cr0
+    or eax, 0x1
+    mov cr0, eax
+    jmp CODE_SEG:load32
 
 ; GDT
 gdt_start:
