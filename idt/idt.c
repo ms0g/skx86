@@ -32,6 +32,5 @@ void idt_init() {
 
     // load the interrupt descriptor table
     idt_load(&idtr_descriptor);
-
 }
 
