@@ -1,5 +1,10 @@
-OBJS = ./build/kernel/kernel.asm.o ./build/kernel/kernel.o ./build/idt/idt.asm.o ./build/idt/idt.o ./build/memory/memory.o
-INCLUDES = -I./kernel -I./config -I./memory -I./idt
+OBJS = ./build/kernel/kernel.asm.o \
+		./build/kernel/kernel.o \
+		./build/idt/idt.asm.o \
+		./build/idt/idt.o \
+		./build/memory/memory.o \
+		./build/io/io.asm.o
+INCLUDES = -I./kernel -I./config -I./memory -I./idt -I./io
 FLAGS = -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops \
 		-fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin \
 		-Werror -Wno-unused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc
@@ -32,6 +37,9 @@ all: ./bin/boot.bin ./bin/kernel.bin
 ./build/memory/memory.o: ./memory/memory.c
 	i686-elf-gcc $(INCLUDES) $(FLAGS) -std=gnu99 -c ./memory/memory.c -o ./build/memory/memory.o
 
+./build/io/io.asm.o: ./io/io.asm
+	nasm -f elf -g ./io/io.asm  -o ./build/io/io.asm.o
+
 clean:
 	rm -rf ./bin/*
 	rm -rf ./build/kernel/kernel.asm.o
@@ -40,6 +48,7 @@ clean:
 	rm -rf ./build/idt/idt.asm.o
 	rm -rf ./build/idt/idt.o
 	rm -rf ./build/memory/memory.o
+	rm -rf ./build/io/io.asm.o
 
 run:
 	qemu-system-x86_64 -hda ./bin/os.bin
