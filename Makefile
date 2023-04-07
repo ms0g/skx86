@@ -27,4 +27,4 @@ clean:
 	rm -rf ./bin/* ./build/*
 
 run:
-	qemu-system-x86_64 -hda ./bin/os.bin
+	qemu-system-i386 -hda ./bin/os.bin
