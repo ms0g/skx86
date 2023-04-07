@@ -17,7 +17,7 @@ all: ./bin/boot.bin ./bin/kernel.bin
 	nasm -f elf64 -g kernel.asm  -o ./build/kernel.asm.o
 
 clean:
-	rm -rf bin/* build/*
+	rm -rf ./bin/* ./build/*
 
 run:
 	qemu-system-x86_64 -hda bin/os.bin
