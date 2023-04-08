@@ -13,7 +13,7 @@ struct idt_desc {
 
 struct idtr_desc {
     uint16_t limit; // size of descriptor table - 1
-    uint16_t base; // base address of the start of interrupt descriptor table
+    uint32_t base; // base address of the start of interrupt descriptor table
 }__attribute__((packed));
 
 void idt_init();
