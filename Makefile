@@ -6,7 +6,7 @@ OBJS = ./build/kernel/kernel.asm.o \
 		./build/memory/heap/heap.o \
 		./build/memory/heap/kheap.o \
 		./build/io/io.asm.o
-INCLUDES = -I./kernel -I./config -I./memory -I./idt -I./io
+INCLUDES = -I./kernel -I./config -I./memory -I./memory/heap -I./idt -I./io -I./status
 FLAGS = -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops \
 		-fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin \
 		-Werror -Wno-unused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc
@@ -39,14 +39,14 @@ all: ./bin/boot.bin ./bin/kernel.bin
 ./build/memory/memory.o: ./memory/memory.c
 	i686-elf-gcc $(INCLUDES) $(FLAGS) -std=gnu99 -c ./memory/memory.c -o ./build/memory/memory.o
 
-./build/io/io.asm.o: ./io/io.asm
-	nasm -f elf -g ./io/io.asm  -o ./build/io/io.asm.o
-
 ./build/memory/heap/heap.o: ./memory/heap/heap.c
 	i686-elf-gcc $(INCLUDES) $(FLAGS) -std=gnu99 -c ./memory/heap/heap.c -o ./build/memory/heap/heap.o
 
 ./build/memory/heap/kheap.o: ./memory/heap/kheap.c
 	i686-elf-gcc $(INCLUDES) $(FLAGS) -std=gnu99 -c ./memory/heap/kheap.c -o ./build/memory/heap/kheap.o
+
+./build/io/io.asm.o: ./io/io.asm
+	nasm -f elf -g ./io/io.asm  -o ./build/io/io.asm.o
 
 clean:
 	rm -rf ./bin/*
