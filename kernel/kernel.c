@@ -31,7 +31,7 @@ void terminal_writechar(char c, char color) {
 }
 
 void terminal_init() {
-    video_mem = (uint16_t*)0xB8000;
+    video_mem = (uint16_t*) 0xB8000;
     terminal_row = 0;
     terminal_col = 0;
 
@@ -71,11 +71,4 @@ void kernel_main() {
     
     // Enable the system interrupts
     enable_interrupts();
-
-    void* ptr = kmalloc(50);
-    void* ptr1 = kmalloc(5000);
-
-    kfree(ptr);
-    void* ptr2 = kmalloc(100);
-     if (ptr || ptr1 || ptr2) {}
 }
