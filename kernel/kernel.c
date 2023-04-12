@@ -2,6 +2,7 @@
 #include "idt.h"
 #include "kheap.h"
 #include "paging.h"
+#include "disk.h"
 
 uint16_t* video_mem = 0;
 uint16_t terminal_row = 0;
@@ -64,10 +65,13 @@ static struct paging_4gb_chunk* kernel_chunk = 0;
 
 void kernel_main() {
     terminal_init();
-    print("Hello world!\ntest");
+    print("Welcome to KormOS!\n");
     
     // Initialize the heap
     kheap_init();
+
+    // Search and initialize the disks
+    disk_search_and_init();
     
     // Initialize interrupt descriptor table
     idt_init();
