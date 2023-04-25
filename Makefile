@@ -8,8 +8,10 @@ OBJS = ./build/kernel/kernel.asm.o \
 		./build/memory/heap/kheap.o \
 		./build/memory/paging/paging.o \
 		./build/memory/paging/paging.asm.o \
+		./build/fs/pparser.o \
+		./build/string/string.o \
 		./build/io/io.asm.o
-INCLUDES = -I./kernel -I./config -I./memory -I./memory/heap -I./memory/paging -I./idt -I./io -I./status -I./disk
+INCLUDES = -I./kernel -I./config -I./memory -I./memory/heap -I./memory/paging -I./idt -I./io -I./status -I./disk -I./fs -I./string
 FLAGS = -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops \
 		-fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin \
 		-Werror -Wno-unused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc
@@ -59,6 +61,12 @@ all: ./bin/boot.bin ./bin/kernel.bin
 
 ./build/memory/paging/paging.asm.o: ./memory/paging/paging.asm
 	nasm -f elf -g ./memory/paging/paging.asm  -o ./build/memory/paging/paging.asm.o
+
+./build/fs/pparser.o: ./fs/pparser.c
+	i686-elf-gcc $(INCLUDES) $(FLAGS) -std=gnu99 -c ./fs/pparser.c -o ./build/fs/pparser.o
+
+./build/string/string.o: ./string/string.c
+	i686-elf-gcc $(INCLUDES) $(FLAGS) -std=gnu99 -c ./string/string.c -o ./build/string/string.o
 
 clean:
 	rm -rf ./bin/*

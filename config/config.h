@@ -14,4 +14,6 @@
 
 #define KORMOS_SECTOR_SIZE 512
 
+#define KORMOS_MAX_PATH 108
+
 #endif
