@@ -3,6 +3,7 @@ OBJS = ./build/kernel/kernel.asm.o \
 		./build/idt/idt.asm.o \
 		./build/idt/idt.o \
 		./build/disk/disk.o \
+		./build/disk/streamer.o \
 		./build/memory/memory.o \
 		./build/memory/heap/heap.o \
 		./build/memory/heap/kheap.o \
@@ -43,6 +44,9 @@ all: ./bin/boot.bin ./bin/kernel.bin
 
 ./build/disk/disk.o: ./disk/disk.c
 	i686-elf-gcc $(INCLUDES) $(FLAGS) -std=gnu99 -c ./disk/disk.c -o ./build/disk/disk.o
+
+./build/disk/streamer.o: ./disk/streamer.c
+	i686-elf-gcc $(INCLUDES) $(FLAGS) -std=gnu99 -c ./disk/streamer.c -o ./build/disk/streamer.o
 
 ./build/io/io.asm.o: ./io/io.asm
 	nasm -f elf -g ./io/io.asm  -o ./build/io/io.asm.o
