@@ -57,7 +57,7 @@ static struct paging_4gb_chunk* kernel_chunk = 0;
 
 void kernel_main() {
     terminal_init();
-    print("Welcome to KormOS!\n");
+    print("Welcome to SKX86!\n");
     
     // Initialize the heap
     kheap_init();

@@ -37,8 +37,8 @@ static int disk_read_sector(int lba, int total, void* buf) {
 
 void disk_search_and_init() {
     memset(&disk, 0x00, sizeof(disk));
-    disk.type = KORMOS_DISK_TYPE_REAL;
-    disk.sector_size = KORMOS_SECTOR_SIZE;
+    disk.type = SKX86_DISK_TYPE_REAL;
+    disk.sector_size = SKX86_SECTOR_SIZE;
 }
 
 struct disk* disk_get(int index) {

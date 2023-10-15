@@ -8,13 +8,13 @@ struct heap kernel_heap;
 struct heap_table kernel_heap_table;
 
 void kheap_init() {
-    int total_table_entries = KORMOS_HEAP_SIZE_BYTES / KORMOS_HEAP_BLOCK_SIZE;
-    kernel_heap_table.entries = (HEAP_BLOCK_TABLE_ENTRY*) KORMOS_HEAP_TABLE_ADDRESS;
+    int total_table_entries = SKX86_HEAP_SIZE_BYTES / SKX86_HEAP_BLOCK_SIZE;
+    kernel_heap_table.entries = (HEAP_BLOCK_TABLE_ENTRY*) SKX86_HEAP_TABLE_ADDRESS;
     kernel_heap_table.total = total_table_entries;
 
-    void* end = (void*) (KORMOS_HEAP_ADDRESS + KORMOS_HEAP_SIZE_BYTES);
+    void* end = (void*) (SKX86_HEAP_ADDRESS + SKX86_HEAP_SIZE_BYTES);
     
-    int res = heap_create(&kernel_heap, (void*) KORMOS_HEAP_ADDRESS, end, &kernel_heap_table);
+    int res = heap_create(&kernel_heap, (void*) SKX86_HEAP_ADDRESS, end, &kernel_heap_table);
     if (res < 0) {
         print("Failed to create heap\n");
     }

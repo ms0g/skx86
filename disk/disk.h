@@ -1,12 +1,12 @@
 #ifndef DISK_H
 #define DISK_H
 
-typedef unsigned int KORMOS_DISK_TYPE;
+typedef unsigned int SKX86_DISK_TYPE;
 
-#define KORMOS_DISK_TYPE_REAL 0
+#define SKX86_DISK_TYPE_REAL 0
 
 struct disk {
-   KORMOS_DISK_TYPE type;
+   SKX86_DISK_TYPE type;
    int sector_size;
 };
 

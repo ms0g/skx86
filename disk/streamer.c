@@ -21,23 +21,23 @@ int disk_stream_seek(struct disk_stream* stream, int pos) {
 }
 
 int disk_stream_read(struct disk_stream* stream, void* out, int total) {
-    int sector = stream->pos / KORMOS_SECTOR_SIZE;
-    int offset = stream->pos % KORMOS_SECTOR_SIZE;
+    int sector = stream->pos / SKX86_SECTOR_SIZE;
+    int offset = stream->pos % SKX86_SECTOR_SIZE;
 
-    char buf[KORMOS_SECTOR_SIZE];
+    char buf[SKX86_SECTOR_SIZE];
     int res = disk_read_block(stream->disk, sector, 1, buf);
     if (res < 0) {
         goto out;
     }
 
-    int total_to_read = total > KORMOS_SECTOR_SIZE ? KORMOS_SECTOR_SIZE : total;
+    int total_to_read = total > SKX86_SECTOR_SIZE ? SKX86_SECTOR_SIZE : total;
     for (int i = 0; i < total_to_read; i++) {
         *(char*)out++ = buf[offset + i];
     }
 
     stream->pos += total_to_read;
-    if (total > KORMOS_SECTOR_SIZE) {
-        res = disk_stream_read(stream, out, total - KORMOS_SECTOR_SIZE);
+    if (total > SKX86_SECTOR_SIZE) {
+        res = disk_stream_read(stream, out, total - SKX86_SECTOR_SIZE);
     }
     
 out:
