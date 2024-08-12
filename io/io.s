@@ -1,4 +1,4 @@
-section .asm
+section .s
 
 global insb
 global insw
