@@ -20,8 +20,8 @@ SECTIONS
         *(COMMON)
         *(.bss)
     }
-    .asm : ALIGN(4096)
+    .s : ALIGN(4096)
     {
-        *(.asm)
+        *(.s)
     }
 }
