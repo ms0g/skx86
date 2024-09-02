@@ -40,9 +40,9 @@ make
 ```bash
 make run
 ```
-### Contribution
+## Contribution
 
 Contributions are welcome! Feel free to fork this repository, make improvements, and submit pull requests.
 
-### License
+## License
 skx86 is licensed under the MIT License.
